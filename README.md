@@ -5,4 +5,5 @@ Major shout out to redonkuless#9736 on Discord (I am Rodent#0075) for his suberb
 
 # For setup instructions, please see Setup.md.
 
-# For usage instructions in VLC Media Player or OBS Strudio, please see Usage.md
+# For usage instructions in OBS Studio or VLC Media Player, please see Usage.md.
+
