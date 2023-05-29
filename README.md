@@ -1,6 +1,10 @@
 # setup-logitechc920-webcams-server
 Simple guide to setting up multiple Logitech c920 webcams as a server on either a raspberry pi or linux debian box
 
+Major shout out to Redonkuless on discord for his suberb assistance helping me set this up.
+
+###  NOTE: All IP addresses used are currently 10.0.0.11.  These need to be modified to match the IP address of the web cam server; e.g. a Raspbian Bullseye distribution OR similar Debian distro.
+
 ## Commands:
 
 ```apt install ffmpeg```
