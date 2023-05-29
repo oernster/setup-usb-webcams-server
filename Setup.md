@@ -1,12 +1,34 @@
-###  NOTE: All IP addresses used are currently 10.0.0.11.  These need to be modified to match the IP address of the web cam server; e.g. a Raspbian Bullseye distribution OR similar Debian distro.
+###  NOTE: All IP addresses used are currently 10.0.0.11.  These need to be modified to match the IP address of the web cam server; e.g. a Raspbian Bullseye distribution OR similar Debian distro.  You may need to remove and reinstall certain applications that may be broken by performing all of these procedures since the sources.list file is using a different tree to source the packages for your linux distro. 
 
-## Commands:
+## Edit your /etc/apt/sources.list as follows:
 
-```apt install ffmpeg```
+```
+#deb http://raspbian.raspberrypi.org/raspbian/ bullseye main contrib non-free rpi
 
-```apt install nginx libnginx-mod-rtmp```
+deb http://ftp.uk.debian.org/debian bullseye main
 
-```apt install libnginx-mod-rtmp```
+# Uncomment line below then 'apt-get update' to enable 'apt-get source'
+
+#deb-src http://raspbian.raspberrypi.org/raspbian/ bullseye main contrib non-free rpi
+```
+
+## From the command line run the following:
+
+```
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138
+
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 0E98404D386FA1D9
+
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 605C66F00D6C9793
+
+sudo apt update
+
+apt install ffmpeg
+
+apt install nginx libnginx-mod-rtmp
+
+apt install libnginx-mod-rtmp
+```
 
 ## Move nginx.conf to NUC
 Copy nginx.conf as root to /etc/nginx
