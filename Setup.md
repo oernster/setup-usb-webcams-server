@@ -81,9 +81,9 @@ Then send the command:
 ```
 # uncomment this line for debugging:
 
-#/home/pi/startwebcam.sh > /home/pi/startwebcam.txt 2>&1
+#/home/pi/startupwebcam.sh > /home/pi/startwebcam.txt 2>&1
 
 # uncomment this line for production:
 
-/home/pi/startwebcam.sh > /dev/null 2>&1
+/home/pi/startupwebcam.sh > /dev/null 2>&1
 ```
