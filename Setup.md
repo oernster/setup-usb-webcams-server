@@ -36,19 +36,22 @@ Copy nginx.conf as root to /etc/nginx
 ```service nginx restart```
 
 ## Insert this into OBS as media source with NUC IP address:
-```rtmp://10.0.0.11:1935/live/mystream```
+```rtmp://10.0.0.17:1935/live/mystream```
 
 ## Insert this into OBS as media source with NUC IP address:
-```rtmp://10.0.0.11:1935/live/mystream2```
+```rtmp://10.0.0.17:1935/live/mystream2```
 
 
 ## EITHER:
 // Change IP address to match NUC instead of pi
 ```
-ffmpeg -thread_queue_size 512 -ar 44100 -acodec pcm_s16le -f s16le -ac 2 -channel_layout 2.1 -i /dev/null -thread_queue_size 512 -f v4l2 -pix_fmt yuv420p -codec:v mjpeg -framerate 25 -video_size 800x600 -i /dev/video0 -c:v libx264 -c:a libmp3lame -f flv rtmp://10.0.0.11:1935/live/mystream
+ffmpeg -thread_queue_size 512 -ar 44100 -acodec pcm_s16le -f s16le -ac 2 -channel_layout 2.1 -i /dev/null -thread_queue_size 512 -f v4l2 -pix_fmt yuv420p -codec:v mjpeg -framerate 25 -video_size 800x600 -i /dev/video0 -c:v libx264 -preset ultrafast -tune zerolatency -c:a libmp3lame -f flv rtmp://10.0.0.17:1935/live/mystream &
 ```
 ```
-ffmpeg -thread_queue_size 512 -ar 44100 -acodec pcm_s16le -f s16le -ac 2 -channel_layout 2.1 -i /dev/null -thread_queue_size 512 -f v4l2 -pix_fmt yuv420p -codec:v mjpeg -framerate 25 -video_size 800x600 -i /dev/video2 -c:v libx264 -c:a libmp3lame -f flv rtmp://10.0.0.11:1935/live/mystream2
+ffmpeg -thread_queue_size 512 -ar 44100 -acodec pcm_s16le -f s16le -ac 2 -channel_layout 2.1 -i /dev/null -thread_queue_size 512 -f v4l2 -pix_fmt yuv420p -codec:v mjpeg -framerate 25 -video_size 800x600 -i /dev/video2 -c:v libx264 -preset ultrafast -tune zerolatency -c:a libmp3lame -f flv rtmp://10.0.0.17:1935/live/mystream2 &
+```
+```
+ffmpeg -thread_queue_size 512 -ar 44100 -acodec pcm_s16le -f s16le -ac 2 -channel_layout 2.1 -i /dev/null -thread_queue_size 512 -f v4l2 -pix_fmt yuv420p -codec:v mjpeg -framerate 25 -video_size 800x600 -i /dev/video4 -c:v libx264 -preset ultrafast -tune zerolatency -c:a libmp3lame -f flv rtmp://10.0.0.17:1935/live/mystream3 &
 ```
 ## OR for automation:
 Create startupwebcam.sh with an editor in home directory and place the following code in there; not change IP address to NUC IP:
@@ -64,14 +67,15 @@ done
 
 
 # Wait for video devices to become available
-while [ ! -e /dev/video0 ] && [ ! -e /dev/video2 ]; do
+while [ ! -e /dev/video0 ] && [ ! -e /dev/video2 ] && [ ! -e /dev/video4 ]; do
     sleep 5
 done
 
 sleep 40
 
-/usr/bin/ffmpeg -thread_queue_size 512 -ar 44100 -acodec pcm_s16le -f s16le -ac 2 -channel_layout 2.1 -i /dev/null -thread_queue_size 512 -f v4l2 -pix_fmt yuv420p -codec:v mjpeg -framerate 25 -video_size 800x600 -i /dev/video0 -c:v libx264 -c:a libmp3lame -f flv rtmp://10.0.0.11:1935/live/mystream &
-/usr/bin/ffmpeg -thread_queue_size 512 -ar 44100 -acodec pcm_s16le -f s16le -ac 2 -channel_layout 2.1 -i /dev/null -thread_queue_size 512 -f v4l2 -pix_fmt yuv420p -codec:v mjpeg -framerate 25 -video_size 800x600 -i /dev/video2 -c:v libx264 -c:a libmp3lame -f flv rtmp://10.0.0.11:1935/live/mystream2 &
+ffmpeg -thread_queue_size 512 -ar 44100 -acodec pcm_s16le -f s16le -ac 2 -channel_layout 2.1 -i /dev/null -thread_queue_size 512 -f v4l2 -pix_fmt yuv420p -codec:v mjpeg -framerate 25 -video_size 800x600 -i /dev/video0 -c:v libx264 -preset ultrafast -tune zerolatency -c:a libmp3lame -f flv rtmp://10.0.0.17:1935/live/mystream &
+ffmpeg -thread_queue_size 512 -ar 44100 -acodec pcm_s16le -f s16le -ac 2 -channel_layout 2.1 -i /dev/null -thread_queue_size 512 -f v4l2 -pix_fmt yuv420p -codec:v mjpeg -framerate 25 -video_size 800x600 -i /dev/video2 -c:v libx264 -preset ultrafast -tune zerolatency -c:a libmp3lame -f flv rtmp://10.0.0.17:1935/live/mystream2 &
+ffmpeg -thread_queue_size 512 -ar 44100 -acodec pcm_s16le -f s16le -ac 2 -channel_layout 2.1 -i /dev/null -thread_queue_size 512 -f v4l2 -pix_fmt yuv420p -codec:v mjpeg -framerate 25 -video_size 800x600 -i /dev/video4 -c:v libx264 -preset ultrafast -tune zerolatency -c:a libmp3lame -f flv rtmp://10.0.0.17:1935/live/mystream3 &
 ```
 Then send the command:
 
