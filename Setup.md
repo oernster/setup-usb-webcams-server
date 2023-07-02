@@ -58,24 +58,26 @@ Create startupwebcam.sh with an editor in home directory and place the following
 ```
 #!/bin/bash
 
-while true; do
-    if systemctl is-active --quiet nginx; then
-        break
-    fi
-    sleep 5
-done
+# Wait for nginx service to become active
+while ! systemctl is-active --quiet nginx; do
 
+sleep 5
+
+done
 
 # Wait for video devices to become available
 while [ ! -e /dev/video0 ] && [ ! -e /dev/video2 ] && [ ! -e /dev/video4 ]; do
-    sleep 5
+
+sleep 5
+
 done
 
 sleep 40
 
-ffmpeg -thread_queue_size 512 -ar 44100 -acodec pcm_s16le -f s16le -ac 2 -channel_layout 2.1 -i /dev/null -thread_queue_size 512 -f v4l2 -pix_fmt yuv420p -codec:v mjpeg -framerate 25 -video_size 800x600 -i /dev/video0 -c:v libx264 -preset ultrafast -tune zerolatency -c:a libmp3lame -f flv rtmp://10.0.0.17:1935/live/mystream &
-ffmpeg -thread_queue_size 512 -ar 44100 -acodec pcm_s16le -f s16le -ac 2 -channel_layout 2.1 -i /dev/null -thread_queue_size 512 -f v4l2 -pix_fmt yuv420p -codec:v mjpeg -framerate 25 -video_size 800x600 -i /dev/video2 -c:v libx264 -preset ultrafast -tune zerolatency -c:a libmp3lame -f flv rtmp://10.0.0.17:1935/live/mystream2 &
-ffmpeg -thread_queue_size 512 -ar 44100 -acodec pcm_s16le -f s16le -ac 2 -channel_layout 2.1 -i /dev/null -thread_queue_size 512 -f v4l2 -pix_fmt yuv420p -codec:v mjpeg -framerate 25 -video_size 800x600 -i /dev/video4 -c:v libx264 -preset ultrafast -tune zerolatency -c:a libmp3lame -f flv rtmp://10.0.0.17:1935/live/mystream3 &
+# Start ffmpeg processes with optimized settings
+ffmpeg -thread_queue_size 64 -f v4l2 -input_format mjpeg -i /dev/video0 -c:v libx264 -preset ultrafast -tune zerolatency -c:a aac -f flv rtmp://10.0.0.17:1935/live/mystream &
+ffmpeg -thread_queue_size 64 -f v4l2 -input_format mjpeg -i /dev/video2 -c:v libx264 -preset ultrafast -tune zerolatency -c:a aac -f flv rtmp://10.0.0.17:1935/live/mystream2 &
+ffmpeg -thread_queue_size 64 -f v4l2 -input_format mjpeg -i /dev/video4 -c:v libx264 -preset ultrafast -tune zerolatency -c:a aac -f flv rtmp://10.0.0.17:1935/live/mystream3 &
 ```
 Then send the command:
 
