@@ -1,5 +1,5 @@
 # setup-usb-webcams-server
-Simple guide to setting up multiple Logitech c920 webcams as a server on either a raspberry pi or linux debian box
+Simple guide to setting up multiple USB webcams as a server on either a raspberry pi or linux debian box
 
 Major shout out to redonkuless#9736 on Discord (I am Rodent) for his suberb assistance helping me set this up.
 
