@@ -55,7 +55,7 @@ ffmpeg -thread_queue_size 512 -ar 44100 -acodec pcm_s16le -f s16le -ac 2 -channe
 ```
 ffmpeg -thread_queue_size 512 -ar 44100 -acodec pcm_s16le -f s16le -ac 2 -channel_layout 2.1 -i /dev/null -thread_queue_size 512 -f v4l2 -pix_fmt yuv420p -codec:v mjpeg -framerate 25 -video_size 800x600 -i /dev/video4 -c:v libx264 -preset ultrafast -tune zerolatency -c:a libmp3lame -f flv rtmp://10.0.0.17:1935/live/mystream3 &
 ```
-## OR for automation - NOTE using systemctl is deprecated; one day I'll get around to updating this correctly:
+## OR for automation - NOTE using rc.local is deprecated; one day I'll get around to updating this correctly:
 Create startupwebcam.sh with an editor in home directory and place the following code in there; not change IP address to NUC IP:
 ```
 #!/bin/bash
