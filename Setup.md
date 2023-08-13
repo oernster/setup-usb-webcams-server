@@ -1,6 +1,6 @@
 ###  NOTE: All IP addresses used are currently 10.0.0.11.  These need to be modified to match the IP address of the web cam server; e.g. a Raspbian Bullseye distribution OR similar Debian distro.  You may need to remove and reinstall certain applications that may be broken by performing all of these procedures since the sources.list file is using a different tree to source the packages for your linux distro. 
 
-## Edit your /etc/apt/sources.list as follows:
+## Edit your /etc/apt/sources.list as follows ONLY if you are on a raspberry pi:
 
 ```
 #deb http://raspbian.raspberrypi.org/raspbian/ bullseye main contrib non-free rpi
