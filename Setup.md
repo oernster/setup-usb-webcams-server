@@ -12,6 +12,13 @@ deb http://ftp.uk.debian.org/debian bookworm main
 #deb-src http://raspbian.raspberrypi.org/raspbian/ bookworm main contrib non-free rpi
 ```
 
+## IF you are running an older version of raspbian then consider doing the following:
+
+```
+sudo apt dist-upgrade
+```
+First
+
 ## From the command line run the following:
 
 ```
