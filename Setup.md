@@ -40,7 +40,7 @@ sudo apt upgrade
 ```
 
 ## Move nginx.conf to NUC
-Copy nginx.conf as root to /etc/nginx
+Copy nginx.conf from my repository as root to /etc/nginx
 
 ```service nginx restart```
 
