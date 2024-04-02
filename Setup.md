@@ -3,13 +3,13 @@
 ## Edit your /etc/apt/sources.list as follows ONLY if you are on a raspberry pi:
 
 ```
-#deb http://raspbian.raspberrypi.org/raspbian/ bullseye main contrib non-free rpi
+#deb http://raspbian.raspberrypi.org/raspbian/ bookworm main contrib non-free rpi
 
-deb http://ftp.uk.debian.org/debian bullseye main
+deb http://ftp.uk.debian.org/debian bookworm main
 
 # Uncomment line below then 'apt-get update' to enable 'apt-get source'
 
-#deb-src http://raspbian.raspberrypi.org/raspbian/ bullseye main contrib non-free rpi
+#deb-src http://raspbian.raspberrypi.org/raspbian/ bookworm main contrib non-free rpi
 ```
 
 ## From the command line run the following:
